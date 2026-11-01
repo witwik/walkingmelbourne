@@ -1,0 +1,139 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#173d36"><title>Walking Melbourne | Places worth going, on foot</title><style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#19332f;background:#f6f5f0}*{box-sizing:border-box}body{margin:0}header{background:#173d36;color:#fff;padding:30px max(20px,calc((100vw - 1100px)/2)) 38px}header h1{font-family:Georgia,serif;font-size:clamp(38px,6vw,68px);margin:12px 0 8px;font-weight:500}header p{color:#d4e5df;max-width:650px;line-height:1.6}main{max-width:1100px;margin:auto;padding:24px 18px 80px}.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9fd0b6}.controls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin:10px 0 20px}input,select,button{font:inherit;border:1px solid #c9d4cd;border-radius:9px;padding:12px;background:white;color:#173d36}button{cursor:pointer}.button{background:#173d36;color:white;border-color:#173d36}.tabs{display:flex;gap:8px;overflow:auto;padding:4px 0 16px}.tabs button{white-space:nowrap}.tabs .active{background:#173d36;color:white}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{border:1px solid #dce2dc;border-radius:14px;background:#fff;overflow:hidden;display:flex;flex-direction:column}.art{height:150px;display:flex;align-items:center;justify-content:center;font-size:58px;background:linear-gradient(125deg,#dce8dd,#e8dfc7)}.card section{padding:17px;flex:1}.card h2{font-family:Georgia,serif;font-size:24px;font-weight:500;margin:7px 0}.card p{font-size:14px;line-height:1.55;color:#51615b}.meta{font-size:12px;color:#547065}.card footer{display:flex;gap:8px;padding:0 17px 17px}.card footer button{flex:1}.small{font-size:12px}.muted{color:#61746b}.count{margin-bottom:14px}.panel{background:white;border:1px solid #dce2dc;padding:22px;border-radius:14px;margin-bottom:20px}.panel h2{font-family:Georgia,serif;font-weight:500;margin-top:0}dialog{border:0;border-radius:16px;padding:0;max-width:650px;width:calc(100% - 28px);max-height:88vh;overflow:auto;box-shadow:0 20px 70px #0005}dialog::backdrop{background:#122c26aa}.detail{padding:25px}.detail h2{font-family:Georgia,serif;font-size:34px;font-weight:500}.detail p{line-height:1.65}.links{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}.links a{display:inline-block;border:1px solid #b6c6bd;border-radius:8px;padding:10px 12px;text-decoration:none;color:#173d36}.close{float:right}.note{background:#eef3ee;border-radius:10px;padding:12px}.footer{text-align:center;color:#63766c;font-size:12px;margin-top:40px}@media(max-width:780px){.grid{grid-template-columns:repeat(2,1fr)}.controls{grid-template-columns:1fr 1fr}.controls input{grid-column:1/-1}}@media(max-width:520px){.grid{grid-template-columns:1fr}.art{height:120px}.controls{grid-template-columns:1fr 1fr}header{padding:26px 20px}}
+
+.camino-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.camino-stat{background:#eef3ee;border-radius:12px;padding:14px}
+.camino-stat strong{display:block;font-size:27px;color:#173d36}
+.camino-stat span{font-size:12px;color:#61746b}
+.camino-progress{height:10px;background:#e0e6df;border-radius:20px;overflow:hidden}
+.camino-progress div{height:100%;background:#2c8068}
+.camino-form{display:flex;gap:10px;flex-wrap:wrap;align-items:end;margin:16px 0}
+.camino-form label{display:grid;gap:5px;font-size:13px}
+.camino-form input{width:150px}
+.camino-log{padding-left:20px;line-height:1.8}
+@media(max-width:520px){.camino-grid{grid-template-columns:repeat(3,1fr)}.camino-stat{padding:9px}.camino-stat strong{font-size:20px}}
+</style></head><body><header><div class="eyebrow">An independent explorer's guide</div><h1>Walking Melbourne</h1><p>Places worth going, on foot. Markets, gardens, beaches, neighbourhoods, trails and country towns. No step targets. No deadlines. Just somewhere interesting to go.</p></header><main>
+<section class="panel" id="camino-companion">
+ <div class="eyebrow" style="color:#477765">The second Camino</div>
+ <h2>Camino Companion</h2>
+ <p class="muted">Your virtual walk across Spain, alongside real walks around Melbourne. Camino Anywhere remains the source of truth; enter the cumulative distance from your daily screenshot here. Entries stay in this browser.</p>
+ <div class="camino-grid">
+  <div class="camino-stat"><strong id="caminoDone">9</strong><span>km completed</span></div>
+  <div class="camino-stat"><strong id="caminoLeft">765</strong><span>km remaining</span></div>
+  <div class="camino-stat"><strong id="caminoPct">1.2%</strong><span>of 774 km</span></div>
+ </div>
+ <div class="camino-progress" role="progressbar" aria-label="Camino completed"><div id="caminoBar" style="width:1.2%"></div></div>
+ <p id="caminoStage" class="muted">Starting in the Pyrenees. Next milestone: Orisson Ridge.</p>
+ <form class="camino-form" id="caminoForm">
+  <label>Date <input type="date" id="caminoDate" required></label>
+  <label>Total distance shown (km) <input type="number" id="caminoKm" min="0" max="774" step="0.1" required></label>
+  <button class="button" type="submit">Record progress</button>
+ </form>
+ <p class="small muted">Use the total displayed by the app, not the day's distance. Existing dates can be corrected. No double-counting.</p>
+ <h3>Walking journal</h3>
+ <ol class="camino-log" id="caminoLog"></ol>
+ <button id="caminoExport" type="button">Export journal (CSV)</button>
+ <p class="small muted">Daily screenshots can also be sent in ChatGPT for Camino history, Melbourne walk suggestions and a recovery check. This site does not yet read screenshots automatically or sync with ChatGPT.</p>
+</section>
+<div class="panel"><h2>Where shall we go?</h2><p class="muted">Browse the collection, pick a theme, or let chance decide. Travel times depend on your starting point and service schedules.</p><button class="button" id="random">Surprise me ↗</button> <button id="savedOnly">☆ Show saved walks</button></div><div class="controls"><input id="search" type="search" placeholder="Search places, themes, experiences…" aria-label="Search walks"><select id="theme" aria-label="Theme"><option value="">All themes</option></select><select id="region" aria-label="Region"><option value="">All regions</option></select></div><div class="tabs" id="tabs"></div><div class="count muted" id="count"></div><div class="grid" id="cards"></div><div class="footer">First edition · Curated starting points, not turn-by-turn routes. Verify opening hours, transport and path conditions before setting out. Saved walks stay in this browser.</div></main><dialog id="dialog"><div class="detail" id="detail"></div></dialog><script>
+const walks=[
+['Footscray Market & the Maribyrnong','Markets','West','7–10 km','🚶','Explore Footscray Market, multicultural shopping streets and the riverfront.','Footscray Station','Footscray Market; Hopkins Street; Maribyrnong River','Footscray VIC'],
+['South Melbourne Market & Port Melbourne','Markets','Inner city','7–11 km','🥑','A market visit that turns into a walk through Victorian streets to the bay.','Tram access; Southern Cross with onward connection','South Melbourne Market; Clarendon Street; Port Melbourne foreshore','South Melbourne Market VIC'],
+['Dandenong Market & Little India','Markets','South-east','5–9 km','🧺','Food stalls, Indian and Afghan businesses, and a lively town centre.','Dandenong Station','Dandenong Market; Foster Street; central Dandenong','Dandenong Market VIC'],
+['Queen Victoria Market & North Melbourne','Markets','Inner city','5–8 km','🍎','Market sheds, old warehouses, Victorian streets and cafés.','Flagstaff Station','Queen Victoria Market; North Melbourne streets','Queen Victoria Market Melbourne'],
+['Prahran Market & Windsor','Markets','South-east','5–8 km','🥬','Food, old shopfronts and the streets around Chapel Street.','Prahran Station','Prahran Market; Chapel Street; Windsor','Prahran Market VIC'],
+['Preston Market & High Street','Markets','North','5–8 km','🍊','A northern Melbourne classic with a busy food market and older shopping strip.','Preston Station','Preston Market; High Street','Preston Market VIC'],
+['Camberwell Sunday Market','Markets','East','4–7 km','🧥','Second-hand treasures, old shopping streets and residential architecture. Sunday market; check dates.','Camberwell Station','Camberwell Sunday Market; Burke Road','Camberwell Sunday Market'],
+['Royal Botanic Gardens & the Tan','Gardens','Inner city','4–9 km','🌿','Explore the garden collections, lakes, paths and nearby riverfront.','Flinders Street Station; tram onward','Royal Botanic Gardens; Guilfoyle’s Volcano; the Tan','Royal Botanic Gardens Melbourne'],
+['Fitzroy & Carlton Gardens','Gardens','Inner city','5–8 km','🌳','Grand gardens, museums, terraces and old Melbourne streets.','Parliament Station','Fitzroy Gardens; Carlton Gardens; Royal Exhibition Building','Carlton Gardens Melbourne'],
+['St Kilda Botanical Gardens & Elwood','Gardens','Bayside','6–10 km','🌺','A quieter garden detour among coastal streets and the foreshore.','Tram to St Kilda; train return options','St Kilda Botanical Gardens; Elwood Beach','St Kilda Botanical Gardens'],
+['Heide & Yarra parklands','Gardens','North-east','5–9 km','🎨','Art, gardens and the Yarra landscape in Bulleen. Check bus access.','Bus connection required','Heide Museum of Modern Art; Yarra parklands','Heide Museum of Modern Art'],
+['Blackburn Lake Sanctuary','Gardens','East','4–8 km','🦆','Bushland, lake edges and leafy eastern streets.','Blackburn Station; local walk','Blackburn Lake Sanctuary','Blackburn Lake Sanctuary'],
+['Port Melbourne to St Kilda','Coast','Bayside','7–11 km','🌊','A favourite stretch of bay with piers, beaches and cafés.','Tram to Port Melbourne; tram from St Kilda','Station Pier precinct; Middle Park; St Kilda foreshore','Port Melbourne Beach'],
+['St Kilda to Brighton','Coast','Bayside','9–13 km','🏖️','Coastal paths through Elwood to Brighton and its bathing boxes.','Tram to St Kilda; Brighton Beach Station return','St Kilda; Elwood; Brighton Bathing Boxes','Brighton Bathing Boxes'],
+['Williamstown waterfront','Coast','West','6–11 km','⛵','Maritime history, historic streets and wide views across the bay.','Williamstown Station','Williamstown Botanic Gardens; waterfront; historic centre','Williamstown VIC'],
+['Altona foreshore & wetlands','Coast','West','6–12 km','🐚','Long flat bayside walking with wetlands and a relaxed suburban centre.','Altona Station','Altona Beach; coastal trails','Altona Beach VIC'],
+['Sandringham to Black Rock','Coast','Bayside','6–10 km','☀️','Clifftop views, beaches and bayside shopping villages.','Sandringham Station; bus return options','Sandringham foreshore; Black Rock','Black Rock VIC'],
+['Merri Creek Trail','Trails','North','6–16 km','🌱','A familiar favourite with many sections and different access points.','Multiple Mernda-line stations and bus connections','Merri Creek; parklands; bridges','Merri Creek Trail Melbourne'],
+['Yarra Bend Park','Trails','North-east','5–13 km','🌲','River bends, bridges, bushland and historic sites near the city.','Clifton Hill Station; onward walk','Yarra Bend Park; river crossings','Yarra Bend Park'],
+['Darebin Creek Trail','Trails','North','6–14 km','🚲','Creekside paths and green corridors through the north-east.','Various bus and rail access points','Darebin Creek Trail; wetlands','Darebin Creek Trail'],
+['Maribyrnong River Trail','Trails','West','7–15 km','🌉','Riverside paths, industrial remnants and parkland.','Footscray Station; onward walk','Maribyrnong River; Footscray; river bridges','Maribyrnong River Trail'],
+['Mullum Mullum Creek','Trails','East','6–14 km','🍃','A green eastern corridor with bushland and quiet trails.','Train and bus access varies by section','Mullum Mullum Creek Trail','Mullum Mullum Creek Trail'],
+['Plenty Gorge','Trails','North','5–12 km','🦘','A more rugged landscape of river gorge, bushland and open views.','Mernda line plus bus/walk; plan access','Plenty Gorge Park','Plenty Gorge Park'],
+['Springvale food streets','Neighbourhoods','South-east','5–9 km','🍜','Vietnamese food, shops, temples and streets full of activity.','Springvale Station','Springvale shopping centre; food streets','Springvale VIC'],
+['Sunshine & Albion','Neighbourhoods','West','6–10 km','🏭','Multicultural shopping streets, railway history and industrial Melbourne.','Sunshine or Albion Station','Sunshine town centre; Albion streets','Sunshine VIC'],
+['Oakleigh Greek precinct','Neighbourhoods','South-east','4–8 km','☕','Greek cafés, bakeries and a busy suburban centre.','Oakleigh Station','Eaton Mall; central Oakleigh','Oakleigh VIC'],
+['Box Hill streets & gardens','Neighbourhoods','East','5–9 km','🥟','Asian food streets, shopping and local gardens.','Box Hill Station','Box Hill Central; surrounding streets','Box Hill VIC'],
+['Newport & Spotswood','History','West','6–10 km','🚂','Railway heritage, old industrial streets and the Scienceworks precinct.','Newport or Spotswood Station','Newport railway precinct; Scienceworks','Spotswood VIC'],
+['Melbourne General Cemetery','History','Inner city','4–7 km','🏛️','Historic memorials and stories of early Melbourne, with Carlton nearby.','Tram or train plus walk','Melbourne General Cemetery; Carlton streets','Melbourne General Cemetery'],
+['Kyneton by train','Country towns','Regional','6–11 km','🏘️','Piper Street, bluestone architecture and botanical gardens.','Kyneton Station (V/Line)','Piper Street; Kyneton Botanic Gardens','Kyneton VIC'],
+['Castlemaine by train','Country towns','Regional','7–12 km','🏡','Goldfields buildings, independent shops and beautiful gardens.','Castlemaine Station (V/Line)','Historic centre; Castlemaine Botanical Gardens','Castlemaine VIC'],
+['Woodend by train','Country towns','Regional','6–10 km','🌄','A compact town, cafés and creekside walking.','Woodend Station (V/Line)','Town centre; Five Mile Creek','Woodend VIC'],
+['Ballarat by train','Country towns','Regional','8–14 km','🏰','Gold-rush architecture, historic streets and Lake Wendouree.','Ballarat Station (V/Line)','Sturt Street; Lake Wendouree; historic centre','Ballarat VIC'],
+['Geelong waterfront','Country towns','Regional','7–13 km','⚓','Eastern Beach, waterfront art and the botanic gardens.','Geelong Station (V/Line)','Eastern Beach; Geelong Botanic Gardens','Geelong Waterfront'],
+['Bendigo heritage streets','Country towns','Regional','7–12 km','🏦','Gold-rush buildings, Rosalind Park and Chinese heritage.','Bendigo Station (V/Line)','Rosalind Park; historic centre','Bendigo VIC'],
+['Seymour railway town','Country towns','Regional','6–10 km','🚉','Railway history and Goulburn River scenery.','Seymour Station (V/Line)','Historic centre; Goulburn River','Seymour VIC'],
+['Mystery bus from Reservoir','Adventures','North','Flexible','🚌','Choose a bus, get off when something catches your eye, and explore. Check your return service first.','Your nearest convenient bus stop','Unexpected shops; parks; local history','Reservoir VIC'],
+['Tram terminus exploration','Adventures','Metro','Flexible','🚋','Choose a tram route, ride to its end and discover the surrounding streets.','Train connection to a tram route','Unexpected neighbourhoods; local cafés','Melbourne VIC']
+].map((a,i)=>({id:i,title:a[0],theme:a[1],region:a[2],distance:a[3],emoji:a[4],desc:a[5],transport:a[6],stops:a[7],place:a[8]}));
+const $=s=>document.querySelector(s),savedKey='walking-melbourne-saved-v1';let saved=new Set(JSON.parse(localStorage.getItem(savedKey)||'[]')),onlySaved=false,active='All';const categories=['All',...new Set(walks.map(w=>w.theme))];$('#tabs').innerHTML=categories.map(t=>`<button data-tab="${t}" class="${t===active?'active':''}">${t}</button>`).join('');for(const [id,vals] of [['theme',[...new Set(walks.map(w=>w.theme))]],['region',[...new Set(walks.map(w=>w.region))]]])$('#'+id).innerHTML='<option value="">All '+(id==='theme'?'themes':'regions')+'</option>'+vals.map(v=>`<option>${v}</option>`).join('');function url(place){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(place)}function ptx(place){return 'https://www.ptv.vic.gov.au/journey/'}function draw(){const q=$('#search').value.toLowerCase(),t=$('#theme').value,r=$('#region').value;const list=walks.filter(w=>(active==='All'||w.theme===active)&&(!t||w.theme===t)&&(!r||w.region===r)&&(!onlySaved||saved.has(w.id))&&[w.title,w.desc,w.region,w.stops].join(' ').toLowerCase().includes(q));$('#count').textContent=`${list.length} ${list.length===1?'outing':'outings'} · ${saved.size} saved`;$('#cards').innerHTML=list.map(w=>`<article class="card"><div class="art" aria-hidden="true">${w.emoji}</div><section><div class="meta">${w.theme} · ${w.region} · ${w.distance}</div><h2>${w.title}</h2><p>${w.desc}</p><div class="small muted">🚉 ${w.transport}</div></section><footer><button onclick="openWalk(${w.id})">Explore walk →</button><button aria-label="Save ${w.title}" onclick="toggleSave(${w.id})">${saved.has(w.id)?'★':'☆'}</button></footer></article>`).join('')||'<p>No matching walks. Try clearing the filters.</p>'}window.toggleSave=id=>{saved.has(id)?saved.delete(id):saved.add(id);localStorage.setItem(savedKey,JSON.stringify([...saved]));draw()};window.openWalk=id=>{const w=walks[id];$('#detail').innerHTML=`<button class="close" onclick="document.querySelector('dialog').close()">Close ×</button><div class="eyebrow" style="color:#517e6d">${w.theme} · ${w.region}</div><h2>${w.emoji} ${w.title}</h2><p>${w.desc}</p><p><strong>Suggested distance:</strong> ${w.distance}<br><strong>Public transport:</strong> ${w.transport}</p><h3>Things to look for</h3><p>${w.stops.split('; ').join(' · ')}</p><h3>Plan your visit</h3><p>Use the map to choose a route and the PTV planner to check current services. The suggested distance is indicative, not a surveyed GPS track.</p><div class="links"><a href="${url(w.place)}" target="_blank" rel="noopener">View location on map ↗</a><a href="${ptx(w.place)}" target="_blank" rel="noopener">Plan public transport ↗</a><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('cafes near '+w.place)}" target="_blank" rel="noopener">Find coffee nearby ↗</a><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('library near '+w.place)}" target="_blank" rel="noopener">Find work-friendly libraries ↗</a></div><div class="note"><strong>Work stop:</strong> Libraries are often a more dependable laptop option than cafés. Specific café Wi-Fi, power outlets and laptop policies have not yet been checked for this outing.</div><p><button onclick="toggleSave(${id});openWalk(${id})">${saved.has(id)?'★ Saved — remove':'☆ Save this outing'}</button></p>`;$('#dialog').showModal()};$('#tabs').onclick=e=>{if(e.target.dataset.tab){active=e.target.dataset.tab;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===active));draw()}};['search','theme','region'].forEach(x=>$('#'+x).addEventListener('input',draw));$('#savedOnly').onclick=()=>{onlySaved=!onlySaved;$('#savedOnly').textContent=onlySaved?'★ Showing saved · show all':'☆ Show saved walks';draw()};$('#random').onclick=()=>{const list=walks.filter(w=>!onlySaved||saved.has(w.id));if(list.length)openWalk(list[Math.floor(Math.random()*list.length)].id)};draw();
+</script>
+<style>
+.discovery{background:#e9f0e9;border:1px solid #c8d9ce;border-radius:16px;padding:20px;margin:18px 0 22px}.discovery h2{margin:0 0 7px;font-family:Georgia,serif}.discovery p{margin:6px 0 16px;color:#415a50}.discovery-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.discovery-controls label{font-size:13px;font-weight:650;display:block}.discovery-controls select{display:block;width:100%;margin-top:5px;padding:11px;border:1px solid #a8bfb2;border-radius:8px;background:white;color:#18372e}.discovery-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.discovery-result{margin-top:14px;padding:16px;background:white;border-radius:12px}.discovery-result h3{margin:0 0 7px}.discovery-result p{margin:8px 0}.discovery-result button{margin:4px 6px 4px 0}.discovery-small{font-size:12px;color:#576f62}.visited-flag{color:#476958;font-size:12px}@media(max-width:650px){.discovery-controls{grid-template-columns:1fr}.discovery{padding:16px}}
+</style>
+<script>
+(function(){
+const panel=document.createElement('section');panel.className='discovery';panel.innerHTML=`<h2>Where shall I go today?</h2><p>Start with somewhere unfamiliar. The walk is an excuse to explore.</p><div class="discovery-controls"><label>How far?<select id="discover-distance"><option value="any">Any distance</option><option value="short">Up to 8 km</option><option value="medium" selected>8–12 km</option><option value="long">12 km or more</option></select></label><label>What interests you?<select id="discover-theme"><option value="">Anything</option>${[...new Set(walks.map(w=>w.theme))].map(t=>`<option value="${t}">${t}</option>`).join('')}</select></label><label>How far from home?<select id="discover-region"><option value="">Anywhere</option><option value="metro">Melbourne suburbs</option><option value="regional">Regional Victoria</option></select></label></div><div class="discovery-actions"><button class="button" id="discover-pick">Find me somewhere</button><button id="discover-fresh">Prefer somewhere new</button></div><div id="discover-result" aria-live="polite"></div><p class="discovery-small">Distances are indicative. Live weather, journey times and path conditions aren't checked automatically. Use the transport and map links before leaving.</p>`;
+const old=document.querySelector('.panel');old.insertAdjacentElement('afterend',panel);
+const visitedKey='walking-melbourne-visited-v1';let visited=new Set(JSON.parse(localStorage.getItem(visitedKey)||'[]'));let preferNew=true;let lastPick=-1;
+function range(w){const n=[...w.distance.matchAll(/\d+/g)].map(x=>+x[0]);return n.length?n:[0,25]}
+function eligible(w){const d=document.querySelector('#discover-distance').value,t=document.querySelector('#discover-theme').value,r=document.querySelector('#discover-region').value,[min,max]=range(w);return (!t||w.theme===t)&&(!r||(r==='regional'?w.region==='Regional':w.region!=='Regional'))&&(d==='any'||d==='short'&&min<=8||d==='medium'&&min<=12&&max>=8||d==='long'&&max>=12)}
+function pick(){let pool=walks.filter(eligible);if(preferNew){const fresh=pool.filter(w=>!visited.has(w.id));if(fresh.length)pool=fresh}if(pool.length>1)pool=pool.filter(w=>w.id!==lastPick);const out=document.querySelector('#discover-result');if(!pool.length){out.innerHTML='<div class="discovery-result">No matches. Try a different distance or theme.</div>';return}const w=pool[Math.floor(Math.random()*pool.length)];lastPick=w.id;out.innerHTML=`<div class="discovery-result"><div class="discovery-small">${w.theme} · ${w.region} · ${w.distance}</div><h3>${w.title}</h3><p>${w.desc}</p><p><strong>Getting there:</strong> ${w.transport}</p><p><strong>Explore:</strong> ${w.stops.replaceAll(';',' ·')}</p><button class="button" id="discovery-details">Explore outing</button><button id="discovery-visited">${visited.has(w.id)?'✓ Explored':'Mark as explored'}</button><button id="discovery-again">Another idea</button></div>`;document.querySelector('#discovery-details').onclick=()=>openWalk(w.id);document.querySelector('#discovery-again').onclick=pick;document.querySelector('#discovery-visited').onclick=()=>{visited.has(w.id)?visited.delete(w.id):visited.add(w.id);localStorage.setItem(visitedKey,JSON.stringify([...visited]));document.querySelector('#discovery-visited').textContent=visited.has(w.id)?'✓ Explored':'Mark as explored'};}
+document.querySelector('#discover-pick').onclick=pick;document.querySelector('#discover-fresh').onclick=()=>{preferNew=!preferNew;document.querySelector('#discover-fresh').textContent=preferNew?'Prefer somewhere new':'Include familiar places';pick()};document.querySelector('#random').onclick=pick;
+pick();
+})();
+</script>
+
+<script>
+(function(){
+ const KEY='walkingMelbourneCaminoV1', TOTAL=774;
+ const initial=[{date:'2026-10-30',km:9}];
+ let entries;
+ try{entries=JSON.parse(localStorage.getItem(KEY))||initial}catch(e){entries=initial}
+ const $=id=>document.getElementById(id);
+ $('caminoDate').value=new Date().toLocaleDateString('en-CA');
+ function render(){
+  entries.sort((a,b)=>a.date.localeCompare(b.date));
+  const latest=entries.length?entries[entries.length-1].km:0;
+  const pct=Math.min(100,latest/TOTAL*100);
+  $('caminoDone').textContent=latest.toFixed(1).replace(/\.0$/,'');
+  $('caminoLeft').textContent=Math.max(0,TOTAL-latest).toFixed(1).replace(/\.0$/,'');
+  $('caminoPct').textContent=pct.toFixed(1)+'%';
+  $('caminoBar').style.width=pct+'%';
+  $('caminoStage').textContent=latest<11?'Next milestone: Orisson Ridge (approximately 11 km from the start).':'Continue following your milestones in Camino Anywhere.';
+  $('caminoLog').replaceChildren();
+  entries.slice().reverse().forEach((e,i)=>{
+   const li=document.createElement('li');
+   const previous=entries.find(x=>x.date<e.date && !entries.some(y=>y.date<e.date && y.date>x.date));
+   const delta=previous?e.km-previous.km:e.km;
+   li.textContent=e.date+' · '+e.km.toFixed(1)+' km cumulative'+(previous?' · '+(delta>=0?'+':'')+delta.toFixed(1)+' km since previous entry':'');
+   $('caminoLog').append(li);
+  });
+ }
+ $('caminoForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const date=$('caminoDate').value,km=Number($('caminoKm').value);
+  if(!date||!Number.isFinite(km)||km<0||km>TOTAL)return;
+  entries=entries.filter(x=>x.date!==date);
+  entries.push({date,km});localStorage.setItem(KEY,JSON.stringify(entries));render();
+  $('caminoKm').value='';
+ });
+ $('caminoExport').addEventListener('click',()=>{
+  const rows=['date,cumulative_km',...entries.map(e=>e.date+','+e.km)];
+  const url=URL.createObjectURL(new Blob([rows.join('\n')],{type:'text/csv'}));
+  const a=document.createElement('a');a.href=url;a.download='melbourne-camino-journal.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ });
+ render();
+})();
+</script>
+</body></html>
