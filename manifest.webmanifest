@@ -1,0 +1,17 @@
+{
+  "name": "Walking Melbourne",
+  "short_name": "Walking Melbourne",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#347454",
+  "theme_color": "#347454",
+  "icons": [
+    {
+      "src": "/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
